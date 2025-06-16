@@ -1,22 +1,22 @@
-# SHM Splitter - Peer-to-Peer Bill Splitting on Shardeum
+# Shardeum Ticketing Platform
 
-A modern web application for splitting group bills and making payments using SHM cryptocurrency on the Shardeum network.
+A modern web application for purchasing and managing event tickets using SHM cryptocurrency on the Shardeum network.
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Create & Join Groups**: Set up expense groups with friends, family, or colleagues
-- **Smart Bill Splitting**: Automatic equal splits or custom amount distributions
-- **SHM Payments**: Direct cryptocurrency payments using Shardeum's native token
-- **Real-time Balances**: Track who owes what with live balance calculations
-- **Settlement Management**: Easy one-click payments to settle debts
+- **Event Discovery**: Browse available events and ticket options
+- **Secure Ticket Purchase**: Buy tickets using SHM cryptocurrency
+- **Ticket Management**: View and manage your purchased tickets
+- **Real-time Updates**: Live ticket availability and transaction status
+- **User Registration**: Easy registration process for events
 
 ### Technical Features
-- **Shardeum Integration**: Full integration with Shardeum JSON-RPC API
+- **Shardeum Integration**: Full integration with Shardeum blockchain
 - **MetaMask Support**: Seamless wallet connection and transaction signing
-- **Responsive Design**: Works perfectly on desktop and mobile devices
+- **Responsive Design**: Beautiful UI that works on all devices
 - **Real-time Updates**: Live network information and transaction status
-- **Local Storage**: Persistent group data (upgradeable to backend)
+- **Modern UI**: Built with Tailwind CSS and Lucide icons
 
 ## 🛠 Technology Stack
 
@@ -35,7 +35,7 @@ Before running the application, ensure you have:
 1. **Node.js** (v16 or higher)
 2. **MetaMask** browser extension
 3. **Shardeum Network** configured in MetaMask
-4. **SHM tokens** for transactions
+4. **SHM tokens** for ticket purchases
 
 ### Shardeum Network Configuration
 
@@ -49,8 +49,8 @@ Add Shardeum network to MetaMask with these details:
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
-cd shardeum_bill_splitter
+git clone https://github.com/tusharpamnani/shardeum-ticketing-platform.git
+cd shardeum-ticketing-platform
 ```
 
 ### 2. Install Dependencies
@@ -73,42 +73,37 @@ npm run build
 ## 📖 How to Use
 
 ### 1. Connect Your Wallet
-- Click "Connect Wallet" on the landing page
+- Click "Launch App" on the landing page
 - Approve MetaMask connection
 - Ensure you're on the Shardeum network
 
-### 2. Create a Group
-- Click "Create Group" from the dashboard
-- Enter group name and description
-- Add members by entering their wallet addresses
-- Submit to create the group
+### 2. Browse Events
+- View available events on the main dashboard
+- See event details including price, date, and capacity
+- Filter and sort events as needed
 
-### 3. Add Expenses
-- Select a group from your dashboard
-- Click "Add Expense"
-- Enter expense details (description, amount, who paid)
-- Choose split method (equal or custom)
-- Select members to split with
-- Submit the expense
-
-### 4. Settle Payments
-- View your balance in the group dashboard
-- If you owe money (negative balance), click "Settle Payment"
+### 3. Purchase Tickets
+- Select an event you're interested in
+- Click "Register Now" to start the purchase process
+- Fill in your registration details
 - Confirm the SHM transaction in MetaMask
-- Payment will be sent directly to the creditor
+- Receive your ticket instantly
+
+### 4. Manage Tickets
+- View all your purchased tickets in "Your Collection"
+- See transaction details and purchase dates
+- Access event information for your tickets
 
 ## 🔧 API Integration
 
-The application uses the official Shardeum JSON-RPC API methods:
+The application uses the Shardeum blockchain for:
 
 ### Core Methods Used
 - `eth_chainId` - Get network chain ID
 - `eth_gasPrice` - Get current gas prices
 - `eth_getBalance` - Check wallet balances
-- `eth_getTransactionCount` - Get transaction nonces
-- `eth_estimateGas` - Estimate transaction gas
-- `eth_sendTransaction` - Send SHM payments
-- `eth_getTransactionReceipt` - Check transaction status
+- `eth_sendTransaction` - Process ticket purchases
+- `eth_getTransactionReceipt` - Verify purchase status
 
 ### Shardeum-Specific Methods
 - `shardeum_getNetworkAccount` - Network configuration
@@ -118,40 +113,49 @@ The application uses the official Shardeum JSON-RPC API methods:
 ## 🏗 Project Structure
 
 ```
-src/
-├── components/           # React components
-│   ├── WalletConnect.jsx    # Wallet connection UI
-│   ├── GroupList.jsx        # Groups dashboard
-│   ├── GroupDetail.jsx      # Group management
-│   ├── CreateGroup.jsx      # Group creation form
-│   ├── AddExpense.jsx       # Expense addition form
-│   └── NetworkInfo.jsx      # Network status display
-├── services/            # API services
-│   └── shardeumApi.js      # Shardeum blockchain integration
-├── App.jsx             # Main application component
-├── main.jsx            # Application entry point
-└── index.css           # Global styles
+├── src/                    # Source code
+│   ├── services/          # API services
+│   │   └── shardeumApi.js # Shardeum blockchain integration
+│   ├── App.jsx           # Main application component
+│   ├── main.jsx          # Application entry point
+│   └── index.css         # Global styles
+├── public/               # Static assets
+├── index.html           # HTML entry point
+├── package.json         # Project dependencies and scripts
+├── vite.config.js       # Vite configuration
+├── tailwind.config.js   # Tailwind CSS configuration
+├── postcss.config.js    # PostCSS configuration
+└── README.md           # Project documentation
 ```
+
+The application follows a modular structure:
+- `src/` contains all the source code
+  - `services/` handles blockchain integration
+  - `App.jsx` contains the main application logic and UI components
+  - `main.jsx` is the application entry point
+  - `index.css` contains global styles and Tailwind imports
+- Configuration files in the root directory handle build and styling setup
 
 ## 💡 Key Features Explained
 
-### Smart Balance Calculation
-The app automatically calculates who owes what by:
-1. Tracking all expenses and who paid
-2. Calculating each person's share based on split rules
-3. Computing net balances (credits - debits)
-4. Determining optimal settlement paths
+### Smart Ticket Management
+The app handles tickets by:
+1. Verifying ticket availability
+2. Processing secure SHM payments
+3. Generating unique ticket records
+4. Managing user ticket collections
 
-### Settlement Algorithm
-- Identifies creditors (positive balance) and debtors (negative balance)
-- Matches debtors with creditors for efficient settlements
-- Minimizes the number of transactions needed
-- Supports partial payments and complex group dynamics
+### Purchase Flow
+- Secure wallet connection
+- User registration details collection
+- SHM payment processing
+- Instant ticket delivery
+- Transaction verification
 
 ### Security Features
 - All transactions require MetaMask approval
 - No private keys stored in the application
-- Direct blockchain interaction (no intermediaries)
+- Direct blockchain interaction
 - Transaction verification and receipt tracking
 
 ## 🔒 Security Considerations
@@ -159,16 +163,16 @@ The app automatically calculates who owes what by:
 - **Wallet Security**: Never share your private keys
 - **Transaction Verification**: Always verify transaction details in MetaMask
 - **Network Verification**: Ensure you're connected to the correct Shardeum network
-- **Amount Verification**: Double-check payment amounts before confirming
+- **Amount Verification**: Double-check ticket prices before purchasing
 
 ## 🚧 Future Enhancements
 
-- **Backend Integration**: Replace localStorage with proper database
-- **Group Invitations**: Send invite links to join groups
-- **Expense Categories**: Categorize expenses for better tracking
-- **Export Features**: Download expense reports and summaries
-- **Multi-currency Support**: Support for other cryptocurrencies
-- **Recurring Expenses**: Set up automatic recurring payments
+- **Event Creation**: Allow organizers to create and manage events
+- **Ticket Resale**: Enable secondary market for tickets
+- **QR Codes**: Generate QR codes for event entry
+- **Email Notifications**: Send purchase confirmations and reminders
+- **Event Categories**: Better organization of different event types
+- **Analytics**: Track ticket sales and event popularity
 - **Mobile App**: Native mobile applications for iOS and Android
 
 ## 🐛 Troubleshooting
@@ -180,13 +184,13 @@ The app automatically calculates who owes what by:
 - Check that you're on the Shardeum network
 - Refresh the page and try again
 
-**Transaction Failed**
-- Check your SHM balance for gas fees
-- Verify the recipient address is correct
+**Purchase Failed**
+- Check your SHM balance for ticket price and gas
+- Verify the event is still available
 - Ensure network connectivity
 
-**Group Not Loading**
-- Clear browser cache and localStorage
+**Tickets Not Showing**
+- Clear browser cache
 - Check console for error messages
 - Verify wallet connection
 
@@ -195,7 +199,7 @@ The app automatically calculates who owes what by:
 If you encounter issues:
 1. Check the browser console for error messages
 2. Verify your MetaMask configuration
-3. Ensure sufficient SHM balance for transactions
+3. Ensure sufficient SHM balance for purchases
 4. Try refreshing the application
 
 ## 📄 License
